@@ -102,21 +102,28 @@ def shortest_path(source, target):
     exploredSet = QueueFrontier()
 
     connectionFound = False
+    # Keep searching until all nodes in the (connected) graph are visited
+    # or the connection is found
     while not frontier.empty() and not connectionFound:
         currNode = frontier.remove()
+        # Make sure this node is not visited before to avoid cycles
         if not exploredSet.contains_state(currNode.state):
             exploredSet.add(currNode)
+            # Get all actors this actor has worked with
             neighbors = neighbors_for_person(currNode.state)
             for movie_id, person_id in neighbors:
                 newNode = Node(person_id, currNode, movie_id)
+                # Stop if actor is target
                 if newNode.state == target:
                     connectionFound = True
                     break
                 frontier.add(newNode)
 
+    # Reconstruct solution (if exists) from last node
     if connectionFound:
         solution = [(newNode.action, newNode.state)]
         parent = newNode.parent
+        # Traverse back to the source
         while parent.action:
             solution.insert(0, (parent.action, parent.state))
             parent = parent.parent
