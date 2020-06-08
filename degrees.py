@@ -24,7 +24,7 @@ def load_data(directory):
             people[row["id"]] = {
                 "name": row["name"],
                 "birth": row["birth"],
-                "movies": set()
+                "movies": set(),
             }
             if row["name"].lower() not in names:
                 names[row["name"].lower()] = {row["id"]}
@@ -38,7 +38,7 @@ def load_data(directory):
             movies[row["id"]] = {
                 "title": row["title"],
                 "year": row["year"],
-                "stars": set()
+                "stars": set(),
             }
 
     # Load stars
@@ -92,8 +92,36 @@ def shortest_path(source, target):
     If no possible path, returns None.
     """
 
-    # TODO
-    raise NotImplementedError
+    rootNode = Node(source, None, None)
+
+    # Uses BFS to find the optimal path
+    frontier = QueueFrontier()
+    frontier.add(rootNode)
+
+    # Keeps track of visited nodes
+    exploredSet = QueueFrontier()
+
+    connectionFound = False
+    while not frontier.empty() and not connectionFound:
+        currNode = frontier.remove()
+        if not exploredSet.contains_state(currNode.state):
+            exploredSet.add(currNode)
+            neighbors = neighbors_for_person(currNode.state)
+            for movie_id, person_id in neighbors:
+                newNode = Node(person_id, currNode, movie_id)
+                if newNode.state == target:
+                    connectionFound = True
+                    break
+                frontier.add(newNode)
+
+    if connectionFound:
+        solution = [(newNode.action, newNode.state)]
+        parent = newNode.parent
+        while parent.action:
+            solution.insert(0, (parent.action, parent.state))
+        return solution
+
+    return None
 
 
 def person_id_for_name(name):
