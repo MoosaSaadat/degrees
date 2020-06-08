@@ -119,6 +119,7 @@ def shortest_path(source, target):
         parent = newNode.parent
         while parent.action:
             solution.insert(0, (parent.action, parent.state))
+            parent = parent.parent
         return solution
 
     return None
