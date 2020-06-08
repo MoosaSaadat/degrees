@@ -14,12 +14,12 @@ Finally, if there exists a connection, it is displayed in a numbered list statin
 
 ## Example
 **Input:**
-```python
+```
 Name: Jennifer Lawrence
 Name: Emma Watson
 ```
 **Output:**
-```python
+```
 3 degrees of separation.
 1: Jennifer Lawrence and Charlotte Rampling starred in Red Sparrow
 2: Charlotte Rampling and Michael Gambon starred in Paris by Night
