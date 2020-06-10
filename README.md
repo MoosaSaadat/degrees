@@ -25,3 +25,6 @@ Name: Emma Watson
 2: Charlotte Rampling and Michael Gambon starred in Paris by Night
 3: Michael Gambon and Emma Watson starred in Harry Potter and the Deathly Hallows: Part 2
 ```
+
+## Acknowledgement
+The dataset is taken from IMDB and used by their permission.
